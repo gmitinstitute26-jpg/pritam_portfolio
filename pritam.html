@@ -83,43 +83,41 @@
         .nav-links a:hover { color: var(--neon-cyan); }
 
         #hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .hero-content { position: relative; z-index: 2; text-align: center; max-width: 800px; padding: 3rem; }
-        .hero-content h1 { font-size: 3.5rem; margin: 10px 0; color: white; }
+        .hero-content h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin: 10px 0; color: white; }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
-        .about-img img { width: 100%; border-radius: 10px; display: block; border: 1px solid var(--neon-cyan); }
+        .about-img { position: relative; max-width: 350px; margin: 0 auto; }
+        .about-img img { 
+            width: 100%; 
+            border-radius: 15px; 
+            display: block; 
+            border: 2px solid var(--neon-cyan); 
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            transition: 0.3s;
+            background: var(--bg-dark); /* Fallback color */
+        }
 
         .skill-item { margin-bottom: 1.5rem; }
         .progress-bar { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; margin-top: 5px; }
         .progress { height: 100%; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
 
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
-
-        .timeline { border-left: 2px solid var(--neon-cyan); padding-left: 30px; max-width: 800px; margin: 0 auto; }
-        .timeline-item { margin-bottom: 2rem; position: relative; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -40px; top: 20px;
-            width: 18px; height: 18px; background: var(--bg-dark);
-            border: 2px solid var(--neon-cyan); border-radius: 50%;
-        }
-
-        .tools-flex { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
-        .tool-badge { padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; }
-
-        .contact-wrapper { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; padding: 3rem; }
-        .glass-input { width: 100%; padding: 15px; margin-bottom: 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; color: white; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        
+        .contact-wrapper { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; padding: 2rem; }
+        .glass-input { width: 100%; padding: 12px; margin-bottom: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; color: white; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        footer { text-align: center; padding: 3rem 20px; border-top: 1px solid var(--glass-border); }
+        footer { text-align: center; padding: 3rem 20px; border-top: 1px solid var(--glass-border); margin-top: 50px;}
 
         @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
             .nav-links { display: none; }
             .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 2.5rem; }
+            .container { padding: 60px 20px; }
         }
     </style>
 </head>
@@ -131,7 +129,6 @@
             <li><a href="#hero">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -139,70 +136,61 @@
     <section id="hero">
         <canvas id="particle-canvas"></canvas>
         <div class="hero-content glass card reveal">
-            <p class="mono-text accent">Cybersecurity Expert</p>
+            <p class="mono-text accent">Cybersecurity Specialist</p>
             <h1>Pritam Nath Dipta</h1>
             <p class="tagline">Securing Infrastructure at <strong>GM IT Limited</strong>. Based in Chittagong.</p>
-            <div class="cta-buttons" style="margin-top: 20px;">
-                <a href="#contact" class="btn primary-btn">Contact Me</a>
-                <a href="#projects" class="btn glass" style="color: white; margin-left: 10px;">Portfolio</a>
+            <div class="cta-buttons" style="margin-top: 25px;">
+                <a href="#contact" class="btn primary-btn">Secure Inquiry</a>
+                <a href="#about" class="btn glass" style="color: white; margin-left: 10px; border: 1px solid rgba(255,255,255,0.2);">Explore Profile</a>
             </div>
         </div>
     </section>
 
     <section id="about" class="container">
-        <h2 class="section-title reveal">Profile</h2>
+        <h2 class="section-title reveal">Identity</h2>
         <div class="about-grid">
             <div class="about-img reveal">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400&h=500" alt="Pritam Nath Dipta">
+                <img src="profile.jpg" alt="Pritam Nath Dipta" onerror="this.src='https://via.placeholder.com/400x500/0a0e17/00f0ff?text=Pritam+Nath+Dipta'">
             </div>
             <div class="about-text reveal">
-                <p>I am a Cybersecurity Specialist currently serving at <strong>GM IT Limited</strong> in Chittagong. My mission is to build unbreakable digital environments through rigorous testing and ethical hacking.</p>
-                <div class="skills" style="margin-top: 20px;">
+                <p>Expert in identifying vulnerabilities and hardening network defenses. Currently leading security initiatives at <strong>GM IT Limited</strong>.</p>
+                <div class="skills" style="margin-top: 25px;">
                     <div class="skill-item"><span>Vulnerability Assessment</span><div class="progress-bar"><div class="progress" style="width: 95%;"></div></div></div>
                     <div class="skill-item"><span>Network Penetration</span><div class="progress-bar"><div class="progress" style="width: 90%;"></div></div></div>
-                    <div class="skill-item"><span>Web Security Auditing</span><div class="progress-bar"><div class="progress" style="width: 88%;"></div></div></div>
+                    <div class="skill-item"><span>Security Auditing</span><div class="progress-bar"><div class="progress" style="width: 88%;"></div></div></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="services" class="container">
-        <h2 class="section-title reveal">Security Services</h2>
+        <h2 class="section-title reveal">Expertise</h2>
         <div class="grid-3">
-            <div class="glass card reveal"><i class="fas fa-user-secret accent" style="font-size: 2rem;"></i><h3>Ethical Hacking</h3><p>Identifying hidden backdoors before they can be exploited.</p></div>
-            <div class="glass card reveal"><i class="fas fa-shield-virus accent" style="font-size: 2rem;"></i><h3>Malware Analysis</h3><p>Deep inspection of suspicious files and behavior monitoring.</p></div>
-            <div class="glass card reveal"><i class="fas fa-file-invoice accent" style="font-size: 2rem;"></i><h3>Security Reporting</h3><p>Actionable intelligence for executive decision making.</p></div>
-        </div>
-    </section>
-
-    <section id="experience" class="container">
-        <h2 class="section-title reveal">Work History</h2>
-        <div class="timeline reveal">
-            <div class="timeline-item glass card">
-                <h4>Cybersecurity Specialist</h4>
-                <p class="mono-text accent">GM IT Limited | Chittagong</p>
-                <p>Currently overseeing security operations, vulnerability management, and infrastructure hardening.</p>
-            </div>
+            <div class="glass card reveal"><i class="fas fa-user-secret accent" style="font-size: 2rem; margin-bottom: 1rem;"></i><h3>Ethical Hacking</h3><p>Authorized simulation of attacks to find security gaps.</p></div>
+            <div class="glass card reveal"><i class="fas fa-shield-virus accent" style="font-size: 2rem; margin-bottom: 1rem;"></i><h3>Cyber Defense</h3><p>Implementing multi-layer defense strategies for IT systems.</p></div>
+            <div class="glass card reveal"><i class="fas fa-terminal accent" style="font-size: 2rem; margin-bottom: 1rem;"></i><h3>VAPT</h3><p>Vulnerability Assessment and Penetration Testing reports.</p></div>
         </div>
     </section>
 
     <section id="contact" class="container">
-        <h2 class="section-title reveal">Secure Channel</h2>
+        <h2 class="section-title reveal">Connect</h2>
         <div class="contact-wrapper glass card reveal">
-            <form>
-                <input type="text" placeholder="Name" class="glass-input">
-                <input type="email" placeholder="Email" class="glass-input">
-                <textarea rows="4" placeholder="Message" class="glass-input"></textarea>
-                <button type="button" class="btn primary-btn">Send Message</button>
-            </form>
+            <div>
+                <form action="#">
+                    <input type="text" placeholder="Name" class="glass-input" required>
+                    <input type="email" placeholder="Email" class="glass-input" required>
+                    <textarea rows="4" placeholder="Encrypted Message" class="glass-input" required></textarea>
+                    <button type="submit" class="btn primary-btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
             <div class="contact-info">
-                <h3 style="margin-bottom: 20px;">Direct Contact</h3>
-                <p><i class="fas fa-phone accent"></i> 01318882755</p>
-                <p><i class="fas fa-envelope accent"></i> redxpritam@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt accent"></i> Chittagong, Bangladesh</p>
-                <div style="margin-top: 20px;">
-                    <a href="#" class="accent" style="font-size: 1.5rem; margin-right: 15px;"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="accent" style="font-size: 1.5rem;"><i class="fab fa-github"></i></a>
+                <h3 style="margin-bottom: 15px; color: var(--neon-cyan);">Info</h3>
+                <p style="margin-bottom: 10px;"><i class="fas fa-phone accent"></i> 01318882755</p>
+                <p style="margin-bottom: 10px;"><i class="fas fa-envelope accent"></i> redxpritam@gmail.com</p>
+                <p style="margin-bottom: 20px;"><i class="fas fa-map-marker-alt accent"></i> Chittagong, BD</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="https://linkedin.com" target="_blank" class="accent" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com" target="_blank" class="accent" style="font-size: 1.5rem;"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
@@ -210,12 +198,12 @@
 
     <footer>
         <p>Pritam Nath Dipta &copy; 2026 | GM IT Limited</p>
-        <p style="font-size: 0.8rem; color: var(--text-muted);">Encrypted Connection Established.</p>
+        <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 5px;">Built for Performance and Security.</p>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Scroll Reveal
+            // Scroll Reveal Logic
             const reveals = document.querySelectorAll(".reveal");
             const revealOnScroll = () => {
                 reveals.forEach((reveal) => {
@@ -227,39 +215,41 @@
             window.addEventListener("scroll", revealOnScroll);
             revealOnScroll();
 
-            // Particles
+            // Background Particles
             const canvas = document.getElementById("particle-canvas");
             const ctx = canvas.getContext("2d");
             let particles = [];
             
-            const init = () => {
+            const initParticles = () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 particles = [];
-                for(let i=0; i<100; i++) {
+                for(let i=0; i<80; i++) {
                     particles.push({
                         x: Math.random() * canvas.width,
                         y: Math.random() * canvas.height,
-                        vx: Math.random() * 2 - 1,
-                        vy: Math.random() * 2 - 1
+                        vx: Math.random() * 1 - 0.5,
+                        vy: Math.random() * 1 - 0.5,
+                        size: Math.random() * 2
                     });
                 }
             };
 
-            const draw = () => {
+            const animateParticles = () => {
                 ctx.clearRect(0,0,canvas.width, canvas.height);
-                ctx.fillStyle = "rgba(0, 240, 255, 0.3)";
+                ctx.fillStyle = "rgba(0, 240, 255, 0.4)";
                 particles.forEach(p => {
                     p.x += p.vx; p.y += p.vy;
                     if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
                     if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                    ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
                 });
-                requestAnimationFrame(draw);
+                requestAnimationFrame(animateParticles);
             };
 
-            init(); draw();
-            window.addEventListener("resize", init);
+            initParticles(); 
+            animateParticles();
+            window.addEventListener("resize", initParticles);
         });
     </script>
 </body>
